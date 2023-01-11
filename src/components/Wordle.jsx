@@ -3,4 +3,16 @@ import useWordle from "../hooks/useWorlde";
 
 export default function Wordle({ solution }) {
     const { currentGuess, handleKeyup } = useWordle(solution);
+
+    useEffect(() => {
+        window.addEventListener('keyup', handleKeyup);
+
+        return () => window.removeEventListener('keyup', handleKeyup);
+    }, [handleKeyup]);
+
+    return (
+        <div>
+            <div>Current Guess - {currentGuess}</div>
+        </div>
+    )
 }
